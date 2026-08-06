@@ -10,8 +10,11 @@ class Projects extends Model
 {
     use HasFactory, Notifiable;
 
+    protected $casts = [
+        'stack' => 'array',
+    ];
+
     protected $attributes = [
-        'title' => '',
         'description' => '',
         'link_site' => '',
         'link_github' => '',
