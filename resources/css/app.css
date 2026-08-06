@@ -7,9 +7,40 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@theme {
+    --font-sans:
+        'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif,
+        'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+        'Noto Color Emoji';
+
+    --color-brand-50: #eff6ff;
+    --color-brand-100: #dbeafe;
+    --color-brand-200: #bfdbfe;
+    --color-brand-300: #93c5fd;
+    --color-brand-400: #60a5fa;
+    --color-brand-500: #3b82f6;
+    --color-brand-600: #2563eb;
+    --color-brand-700: #1d4ed8;
+    --color-brand-800: #1e40af;
+    --color-brand-900: #1e3a8a;
+    --color-brand-950: #172554;
+
+    --color-night-50: #f8fafc;
+    --color-night-100: #f1f5f9;
+    --color-night-200: #e2e8f0;
+    --color-night-300: #cbd5e1;
+    --color-night-400: #94a3b8;
+    --color-night-500: #64748b;
+    --color-night-600: #475569;
+    --color-night-700: #334155;
+    --color-night-800: #1e293b;
+    --color-night-900: #0f172a;
+    --color-night-950: #020617;
+}
+
 @theme inline {
     --font-sans:
-        Instrument Sans, ui-sans-serif, system-ui, sans-serif,
+        'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif,
         'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
         'Noto Color Emoji';
 
@@ -83,9 +114,54 @@
     body,
     html {
         --font-sans:
-            'Instrument Sans', ui-sans-serif, system-ui, sans-serif,
+            'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif,
             'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
             'Noto Color Emoji';
+    }
+
+    @keyframes float-y {
+        0%,
+        100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-1rem);
+        }
+    }
+
+    @keyframes float-y-slow {
+        0%,
+        100% {
+            transform: translateY(0) translateX(0);
+        }
+        50% {
+            transform: translateY(-1.6rem) translateX(0.6rem);
+        }
+    }
+
+    @keyframes gradient-pan {
+        0%,
+        100% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+    }
+
+    /* Scroll-reveal (v-reveal directive) */
+    [data-reveal] {
+        opacity: 0;
+        transform: translateY(2rem);
+        transition:
+            opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+            transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        will-change: opacity, transform;
+    }
+
+    [data-reveal][data-revealed='true'] {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 

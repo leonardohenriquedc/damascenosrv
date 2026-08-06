@@ -1,7 +1,10 @@
 import { createInertiaApp } from '@inertiajs/vue3';
+import { createApp, h } from 'vue';
 import { initializeTheme } from '@/composables/useAppearance';
+import { revealDirective } from '@/composables/useReveal';
 import AppLayout from '@/layouts/AppLayout.vue';
 import AuthLayout from '@/layouts/AuthLayout.vue';
+import DefaultLayout from '@/layouts/DefaultLayout.vue';
 import SettingsLayout from '@/layouts/settings/Layout.vue';
 import { initializeFlashToast } from '@/lib/flashToast';
 
@@ -11,8 +14,9 @@ createInertiaApp({
     title: (title) => (title ? `${title} - ${appName}` : appName),
     layout: (name) => {
         switch (true) {
-            case name === 'Welcome':
-                return null;
+            case name === 'Home':
+            case name === 'Projects':
+                return DefaultLayout;
             case name.startsWith('auth/'):
                 return AuthLayout;
             case name.startsWith('settings/'):
@@ -22,7 +26,17 @@ createInertiaApp({
         }
     },
     progress: {
-        color: '#4B5563',
+        color: '#2563EB',
+    },
+    setup({ el, App, props, plugin }) {
+        if (!el) {
+            return;
+        }
+
+        createApp({ render: () => h(App, props) })
+            .use(plugin)
+            .directive('reveal', revealDirective)
+            .mount(el);
     },
 });
 
